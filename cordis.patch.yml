@@ -1,0 +1,17 @@
+# ============================================================================
+# dsh-browser-history —— DSH bundle patch（挂载声明）
+# ============================================================================
+# 安装（本机侧边栏浏览器只在 desktop profile 挂载，故必须装进 desktop）：
+#   dsh plugin --profile desktop add link:D:\dsh-browser-history
+#
+# 本插件是「纯客户端插件」：宿主侧 lib/index.js 不注册任何服务、不挂事件，
+# 只是为了把客户端 bundle 提供给浏览器（/plugins/dsh-browser-history/client.js）。
+# 真正的逻辑全在 lib/client.js —— 它监听官方 <webview> 的导航事件。
+#
+# 卸载：从 profile 的 package.json 里删掉 dependencies 与本 bundles 条目，
+#   或在 profile 的 cordis.patch.yml 里给下面这行加 disabled: true。
+# ============================================================================
+
+- insert:
+    - id: dsh-browser-history
+      name: dsh-browser-history
